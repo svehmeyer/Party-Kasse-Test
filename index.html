@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Party Kasse">
-<title>Party Kasse</title>
+<meta name="apple-mobile-web-app-title" content="Party-Kasse">
+<title>Party-Kasse v1.1.0</title>
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -174,28 +174,59 @@ function buildCSS(dark) {
     'html,body,#root{height:100%;overflow:hidden}',
     'body{background:' + bg + ';color:' + text + '}',
     '.app{display:flex;flex-direction:column;height:100vh;background:' + bg + ';color:' + text + ';overflow:hidden;transition:background .2s,color .2s}',
-    '.nav{display:flex;gap:7px;padding:9px 11px;background:' + surface + ';border-bottom:1px solid ' + border + ';flex-shrink:0}',
+    '.version-badge{position:fixed;bottom:10px;right:12px;font-size:10px;color:' + muted + ';font-weight:600;background:' + surface + ';padding:3px 8px;border-radius:6px;border:1px solid ' + border + ';z-index:9000;pointer-events:none;opacity:.8}',
+    '.nav{position:relative;display:flex;gap:7px;padding:9px 11px;background:' + surface + ';border-bottom:1px solid ' + border + ';flex-shrink:0}',
+    '.burger-btn{width:44px;height:44px;border:1.5px solid ' + border + ';border-radius:10px;background:' + bg + ';cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex-shrink:0;transition:all .15s}',
+    '.burger-btn:hover{background:' + card + '}',
+    '.burger-line{display:block;width:18px;height:2px;background:' + text + ';border-radius:2px}',
+    '.burger-menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px}',
+    '.burger-menu{background:' + surface + ';border-radius:16px;padding:20px;max-width:320px;width:100%;box-shadow:0 24px 48px rgba(0,0,0,.3)}',
+    '.burger-menu-title{font-size:16px;font-weight:700;margin-bottom:16px;text-align:center;color:' + text + '}',
+    '.burger-menu-items{display:flex;flex-direction:column;gap:8px}',
+    '.burger-item{display:flex;align-items:center;gap:14px;padding:15px 18px;background:' + card + ';border:1.5px solid ' + border + ';border-radius:12px;cursor:pointer;transition:all .15s;text-align:left;width:100%}',
+    '.burger-item:hover{border-color:#3b82f6;background:rgba(59,130,246,.08)}',
+        '.burger-item-icon{font-size:22px;width:32px;text-align:center;flex-shrink:0}',
+    '.burger-item-text{flex:1}',
+    '.burger-item-title{font-size:14px;font-weight:600;color:' + text + ';margin-bottom:2px}',
+    '.burger-item-desc{font-size:11px;color:' + muted + '}',
+    '.burger-item.danger .burger-item-title{color:#ef4444}',
+    '.burger-item.danger{border-color:rgba(239,68,68,.25)}',
+    '.burger-item.danger:hover{border-color:#ef4444;background:rgba(239,68,68,.06)}',
+    '.admin-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:600;display:flex;align-items:center;justify-content:center;padding:16px}',
+    '.admin-modal{background:' + surface + ';border-radius:16px;width:100%;max-width:480px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,.35)}',
+    '.admin-modal-header{display:flex;align-items:center;gap:10px;padding:12px 14px;background:' + surface + ';border-bottom:1px solid ' + border + ';flex-shrink:0}',
+    '.admin-modal-back{width:36px;height:36px;border:1.5px solid ' + border + ';border-radius:9px;background:transparent;color:' + text + ';font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}',
+    '.admin-modal-back:hover{background:' + card + '}',
+    '.admin-modal-title{font-size:16px;font-weight:700;flex:1}',
+    '.admin-modal-body{flex:1;overflow-y:auto;padding:14px;-webkit-overflow-scrolling:touch}',
     '.nb{flex:1;padding:11px 5px;border:1.5px solid ' + border + ';border-radius:10px;background:' + bg + ';color:' + text + ';font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}',
     '.nb:hover{background:' + card + '}',
     '.nb.on{background:#3b82f6;color:#fff;border-color:#3b82f6}',
     '.sl{display:flex;gap:10px;height:100%;overflow:hidden;padding:11px}',
     '.ac{flex:1;overflow-y:auto;padding-right:3px;-webkit-overflow-scrolling:touch}',
-    '.cc{width:265px;flex-shrink:0;display:flex;flex-direction:column;align-self:flex-start;position:sticky;top:0}',
+    '.cc{width:340px;flex-shrink:0;display:flex;flex-direction:column;align-self:flex-start;position:sticky;top:0}',
     '@media(max-width:600px){.sl{flex-direction:column;padding:8px}.ac{flex:1;min-height:0}.cc{width:100%;flex-shrink:0;align-self:auto;position:static}}',
     '.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:13px}',
     '.sc{background:' + surface + ';border:1px solid ' + border + ';border-radius:11px;padding:9px 7px;text-align:center}',
     '.sc-l{font-size:9px;color:' + muted + ';text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}',
     '.sc-v{font-size:16px;font-weight:700;color:#3b82f6}',
-    '.sec{margin-bottom:15px}',
-    '.st{font-size:10px;font-weight:700;margin-bottom:7px;color:' + muted + ';text-transform:uppercase;letter-spacing:.6px}',
-    '.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:7px}',
-    '.ab{padding:13px 7px;background:' + surface + ';border:2px solid ' + border + ';border-radius:11px;cursor:pointer;text-align:center;transition:all .15s;color:' + text + ';position:relative}',
+    '.sec{margin-bottom:12px;background:' + surface + ';border:1.5px solid ' + border + ';border-radius:14px;overflow:hidden;transition:box-shadow .2s}',
+    '.sec.dragging{box-shadow:0 8px 24px rgba(0,0,0,.18);opacity:.95;z-index:100;position:relative}',
+    '.sec-drag-row{display:flex;align-items:center;gap:0;border-bottom:1px solid ' + border + '}',
+    '.drag-handle{width:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:10px 0;cursor:grab;color:' + muted + ';font-size:18px;border-right:1px solid ' + border + ';background:' + card + ';user-select:none;-webkit-user-select:none;touch-action:none}',
+    '.drag-handle:active{cursor:grabbing;background:' + border + '}',
+    '.sec-title-wrap{flex:1;padding:10px 14px;display:flex;align-items:center;justify-content:space-between}',
+    '.st{font-size:11px;font-weight:700;color:' + muted + ';text-transform:uppercase;letter-spacing:.6px}',
+    '.sec-count{font-size:10px;color:' + muted + ';background:' + card + ';padding:2px 7px;border-radius:10px;font-weight:600}',
+    '.sec-grid-wrap{padding:10px}',
+    '.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:9px}',
+    '.ab{padding:18px 10px;background:' + surface + ';border:2px solid ' + border + ';border-radius:11px;cursor:pointer;text-align:center;transition:all .15s;color:' + text + ';position:relative}',
     '.ab:hover:not([disabled]){border-color:#3b82f6;transform:translateY(-1px);box-shadow:0 3px 10px rgba(59,130,246,.18)}',
     '.ab:active:not([disabled]){transform:scale(.95)}',
     '.ab[disabled]{opacity:.33;cursor:not-allowed}',
-    '.ab .an{font-size:11px;font-weight:600;margin-bottom:4px}',
-    '.ab .ap{font-size:15px;font-weight:700;color:#3b82f6;margin-bottom:3px}',
-    '.ab .as{font-size:10px;color:' + muted + '}',
+    '.ab .an{font-size:13px;font-weight:600;margin-bottom:6px}',
+    '.ab .ap{font-size:18px;font-weight:700;color:#3b82f6;margin-bottom:4px}',
+    '.ab .as{font-size:11px;color:' + muted + '}',
     '.ab .as.low{color:#f59e0b;font-weight:700}',
     '.bdg{position:absolute;top:4px;right:5px;background:#3b82f6;color:#fff;border-radius:9px;font-size:9px;font-weight:700;padding:1px 5px;line-height:1.4}',
     '.cart{background:' + surface + ';border:1.5px solid ' + border + ';border-radius:13px;display:flex;flex-direction:column;overflow:hidden}',
@@ -206,16 +237,16 @@ function buildCSS(dark) {
     '.cb{max-height:340px;overflow-y:auto;padding:7px;-webkit-overflow-scrolling:touch}',
     '.ce{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;color:' + muted + ';font-size:12px;gap:7px;text-align:center}',
     '.ce-i{font-size:26px;opacity:.35}',
-    '.ci{display:flex;align-items:center;gap:5px;padding:6px 5px;border-radius:8px;margin-bottom:2px}',
+    '.ci{display:flex;align-items:center;gap:7px;padding:9px 7px;border-radius:8px;margin-bottom:2px}',
     '.ci:hover{background:' + card + '}',
-    '.cin{flex:1;font-size:11px;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
-    '.cip{font-size:10px;color:' + muted + ';min-width:38px;text-align:right;flex-shrink:0}',
+    '.cin{flex:1;font-size:13px;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+    '.cip{font-size:13px;font-weight:600;color:' + muted + ';min-width:38px;text-align:right;flex-shrink:0}',
     '.qc{display:flex;align-items:center;gap:3px;flex-shrink:0}',
-    '.qb{width:20px;height:20px;border:1.5px solid ' + border + ';border-radius:5px;background:' + bg + ';color:' + text + ';font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}',
+    '.qb{width:28px;height:28px;border:1.5px solid ' + border + ';border-radius:6px;background:' + bg + ';color:' + text + ';font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}',
     '.qb:hover{border-color:#3b82f6;color:#3b82f6}',
     '.qb[disabled]{opacity:.3;cursor:not-allowed}',
-    '.qn{font-size:11px;font-weight:700;min-width:14px;text-align:center}',
-    '.cdl{width:18px;height:18px;border:none;background:transparent;color:' + muted + ';font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .15s;flex-shrink:0}',
+    '.qn{font-size:14px;font-weight:700;min-width:22px;text-align:center}',
+    '.cdl{width:24px;height:24px;border:none;background:transparent;color:' + muted + ';font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .15s;flex-shrink:0}',
     '.cdl:hover{color:#ef4444}',
     '.cf{padding:11px;border-top:1px solid ' + border + ';flex-shrink:0}',
     '.lbk{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:' + (dark?'rgba(59,130,246,.12)':'rgba(59,130,246,.07)') + ';border:1px solid ' + (dark?'rgba(59,130,246,.3)':'rgba(59,130,246,.2)') + ';border-radius:9px;margin-bottom:9px;font-size:11px;gap:8px}',
@@ -224,9 +255,9 @@ function buildCSS(dark) {
     '.sb{padding:4px 9px;background:transparent;border:1px solid #ef4444;border-radius:6px;color:#ef4444;font-size:10px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}',
     '.sb:hover{background:#ef4444;color:#fff}',
     '.tr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}',
-    '.tl{font-size:12px;color:' + muted + '}',
-    '.tv{font-size:20px;font-weight:700}',
-    '.bkbtn{width:100%;padding:13px;background:#10b981;border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}',
+    '.tl{font-size:14px;color:' + muted + '}',
+    '.tv{font-size:24px;font-weight:700}',
+    '.bkbtn{width:100%;padding:16px;background:#10b981;border:none;border-radius:11px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;transition:all .15s}',
     '.bkbtn:hover{background:#059669;transform:translateY(-1px)}',
     '.bkbtn:active{transform:scale(.97)}',
     '.bkbtn[disabled]{background:' + border + ';color:' + muted + ';cursor:not-allowed;transform:none}',
@@ -339,6 +370,13 @@ function buildCSS(dark) {
     '.ai .am{font-size:10px;color:' + muted + ';margin-top:1px}',
     '.ask{font-size:10px;color:' + muted + ';min-width:70px;text-align:right}',
     '.acs{display:flex;gap:4px;flex-shrink:0}',
+    '.cat-section{background:' + surface + ';border:1.5px solid ' + border + ';border-radius:12px;padding:14px;margin-bottom:14px}',
+    '.cat-section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}',
+    '.cat-section-title{font-size:14px;font-weight:700}',
+    '.cat-list{display:flex;flex-direction:column;gap:7px}',
+    '.cat-row{display:flex;align-items:center;gap:8px;padding:9px 12px;background:' + card + ';border-radius:9px}',
+    '.cat-name{flex:1;font-size:13px;font-weight:600}',
+    '.cat-actions{display:flex;gap:5px;flex-shrink:0}',
     '.reset-card{background:' + (dark?'rgba(239,68,68,.1)':'rgba(239,68,68,.05)') + ';border:1.5px solid ' + (dark?'rgba(239,68,68,.3)':'rgba(239,68,68,.2)') + ';border-radius:12px;padding:16px;margin-bottom:16px}',
     '.reset-card h3{font-size:13px;font-weight:700;color:#ef4444;margin-bottom:6px}',
     '.reset-card p{font-size:12px;color:' + muted + ';margin-bottom:12px;line-height:1.5}',
@@ -351,9 +389,45 @@ function buildCSS(dark) {
     '.mf{display:flex;gap:6px;margin-top:10px}',
     '.mf .btn{flex:1}',
     '.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#10b981;color:#fff;padding:11px 22px;border-radius:11px;font-size:13px;font-weight:600;z-index:9999;box-shadow:0 8px 20px rgba(0,0,0,.2);animation:fu .3s ease;white-space:nowrap}',
-    '.house-btn{width:100%;margin-top:5px;padding:5px 8px;border:1.5px solid #e5e7eb;border-radius:8px;background:transparent;color:#6b7280;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .15s}',
+    '.house-btn{width:100%;margin-top:8px;padding:10px 12px;border:1.5px solid ' + border + ';border-radius:9px;background:transparent;color:' + muted + ';font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .15s}',
     '.house-btn:hover{border-color:#f59e0b;color:#b45309}',
     '.house-btn.on{border-color:#f59e0b;color:#b45309;background:rgba(251,191,36,.12);font-weight:700}',
+    '.pay-wrap{display:flex;gap:14px;align-items:flex-start;flex-direction:row;justify-content:center}',
+    '@media(max-width:700px){.pay-wrap{flex-direction:column;align-items:center}}',
+    '.numpad{background:' + surface + ';border-radius:16px;padding:14px;box-shadow:0 24px 48px rgba(0,0,0,.35);display:grid;grid-template-columns:repeat(3,72px);grid-template-rows:auto repeat(4,72px);gap:8px;flex-shrink:0}',
+    '.np-header{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding:4px 6px 6px;border-bottom:1px solid ' + border + ';margin-bottom:6px}',
+    '.np-side-toggle{display:flex;gap:4px}',
+    '.np-side-btn{padding:5px 10px;font-size:11px;border:1px solid ' + border + ';background:' + bg + ';color:' + muted + ';border-radius:6px;cursor:pointer;font-weight:600}',
+    '.np-side-btn.on{background:#3b82f6;color:#fff;border-color:#3b82f6}',
+    '.np-title{font-size:12px;color:' + muted + ';font-weight:600}',
+    '.np-key{height:72px;border:1.5px solid ' + border + ';background:' + bg + ';color:' + text + ';font-size:26px;font-weight:600;border-radius:11px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;user-select:none}',
+    '.np-key:hover{border-color:#3b82f6;background:' + card + '}',
+    '.np-key:active{transform:scale(.95);background:#3b82f6;color:#fff}',
+    '.np-key.del{background:rgba(239,68,68,.08);color:#ef4444;border-color:rgba(239,68,68,.3);font-size:22px}',
+    '.np-key.del:hover{background:#ef4444;color:#fff}',
+    '.np-key.clr{background:rgba(245,158,11,.08);color:#b45309;border-color:rgba(245,158,11,.3);font-size:14px;font-weight:700}',
+    '.np-key.clr:hover{background:#f59e0b;color:#fff}',
+    '.pay-field-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:' + card + ';border-radius:10px;margin-bottom:10px}',
+    '.pay-field-lbl{font-size:13px;color:' + muted + ';font-weight:600}',
+    '.pay-field-val.total{font-size:22px;font-weight:700;color:#3b82f6}',
+    '.pay-field-input{background:' + bg + ';border:2px solid ' + border + ';border-radius:11px;padding:11px 14px;margin-bottom:10px;cursor:pointer;transition:all .15s}',
+    '.pay-field-input:hover{border-color:#3b82f6}',
+    '.pay-field-input.active{border-color:#3b82f6;background:' + (dark?'rgba(59,130,246,.08)':'rgba(59,130,246,.04)') + ';box-shadow:0 0 0 3px rgba(59,130,246,.15)}',
+    '.pay-field-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}',
+    '.pay-field-clear{background:transparent;border:none;color:' + muted + ';font-size:14px;cursor:pointer;padding:2px 6px;border-radius:5px}',
+    '.pay-field-clear:hover{color:#ef4444}',
+    '.pay-field-display{min-height:28px;display:flex;align-items:center}',
+    '.pay-field-placeholder{color:' + muted + ';font-size:14px;font-style:italic}',
+    '.pay-field-amount{font-size:22px;font-weight:700;color:' + text + '}',
+    '.pay-summary{margin-top:8px;margin-bottom:14px}',
+    '.pay-sum-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:9px;margin-bottom:6px;font-size:14px;font-weight:600}',
+    '.pay-sum-row.pos{background:' + (dark?'rgba(16,185,129,.12)':'rgba(16,185,129,.08)') + ';color:#10b981}',
+    '.pay-sum-row.neg{background:' + (dark?'rgba(239,68,68,.12)':'rgba(239,68,68,.08)') + ';color:#ef4444}',
+    '.pay-sum-row.tip-color{background:' + (dark?'rgba(251,191,36,.12)':'rgba(251,191,36,.08)') + ';color:#b45309}',
+    '.pay-sum-row strong{font-size:16px;font-weight:700}',
+    '.pay-mode-btn{flex:1;padding:8px 6px;font-size:11px;font-weight:600;border:none;background:transparent;color:' + muted + ';border-radius:7px;cursor:pointer;transition:all .15s}',
+    '.pay-mode-btn.on{background:' + surface + ';color:' + text + ';box-shadow:0 1px 3px rgba(0,0,0,.1)}',
+    '.pay-modal-wide{max-width:380px}',
     '@keyframes fu{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}',
     '@media(max-width:420px){.grid{grid-template-columns:repeat(auto-fill,minmax(88px,1fr))}}'
   ].join('\n');
@@ -368,17 +442,33 @@ function App() {
   var sales       = S([]);
   var bookings    = S([]);
   var cart        = S({});
+  var houseItems  = S({});
   var lastBooking = S(null);
   var toast       = S(null);
   var showPay     = S(false);
   var payInput    = S('');
   var noChange    = S(false);
+  var numpadSide  = S(localStorage.getItem('pk-numpad-side') || 'right');
+  var payToAmount = S('');  // Trinkgeld-Modus: gewünschter Zahlbetrag
+  var activeField = S('paid'); // 'paid' oder 'wish' - welches Feld bekommt Numpad-Eingaben
   var filter      = S('all');
   var search      = S('');
   var editId      = S(null);
   var editBuf     = S({});
   var showNew     = S(false);
-  var newA        = S({ name:'', category:'Alkoholfreie Getränke', price:'', stock:'' });
+  var newA        = S({ name:'', category:'Alkoholfreie Getränke', price:'', stock:'', minStock:'' });
+  var _defCats = [
+    { id:'c1', name:'Alkoholfreie Getränke', visible:true, order:0 },
+    { id:'c2', name:'Softdrinks',            visible:true, order:1 },
+    { id:'c3', name:'Alkoholische Getränke', visible:true, order:2 },
+    { id:'c4', name:'Snacks',               visible:true, order:3 },
+  ];
+  var categories  = S(function(){
+    try { var s=localStorage.getItem('pk-categories'); return s?JSON.parse(s):_defCats; } catch(e){ return _defCats; }
+  }());
+  var catOrder    = S(null);
+  var showBurger  = S(false);
+  var adminView   = S(null);
   var dashTab     = S('stats');
   var openBk      = S(null);
   var confirm     = S(null);
@@ -391,17 +481,25 @@ function App() {
   var setSales       = sales[1];       sales       = sales[0];
   var setBookings    = bookings[1];    bookings    = bookings[0];
   var setCart        = cart[1];        cart        = cart[0];
+  var setHouseItems  = houseItems[1];  houseItems  = houseItems[0];
   var setLastBooking = lastBooking[1]; lastBooking = lastBooking[0];
   var setToast       = toast[1];       toast       = toast[0];
   var setShowPay     = showPay[1];     showPay     = showPay[0];
   var setPayInput    = payInput[1];    payInput    = payInput[0];
   var setNoChange    = noChange[1];    noChange    = noChange[0];
+  var setNumpadSide  = numpadSide[1];  numpadSide  = numpadSide[0];
+  var setPayToAmount = payToAmount[1]; payToAmount = payToAmount[0];
+  var setActiveField = activeField[1]; activeField = activeField[0];
   var setFilter      = filter[1];      filter      = filter[0];
   var setSearch      = search[1];      search      = search[0];
   var setEditId      = editId[1];      editId      = editId[0];
   var setEditBuf     = editBuf[1];     editBuf     = editBuf[0];
   var setShowNew     = showNew[1];     showNew     = showNew[0];
   var setNewA        = newA[1];        newA        = newA[0];
+  var setCategories  = categories[1];  categories  = categories[0];
+  var setCatOrder    = catOrder[1];    catOrder    = catOrder[0];
+  var setShowBurger  = showBurger[1];  showBurger  = showBurger[0];
+  var setAdminView   = adminView[1];   adminView   = adminView[0];
   var setDashTab     = dashTab[1];     dashTab     = dashTab[0];
   var setOpenBk      = openBk[1];      openBk      = openBk[0];
   var setConfirm     = confirm[1];     confirm     = confirm[0];
@@ -421,6 +519,12 @@ function App() {
       if (b.length > 0) setBookings(b.slice().sort(function(x,y){ return y.timestamp - x.timestamp; }));
     });
   }, []);
+
+  // Kategorien speichern
+  function saveCategories(list) {
+    setCategories(list);
+    try { localStorage.setItem('pk-categories', JSON.stringify(list)); } catch(e){}
+  }
 
   function saveArticles(list) {
     setArticles(list);
@@ -460,10 +564,10 @@ function App() {
   function removeFromCart(id) {
     setCart(function(prev) { var n = Object.assign({}, prev); delete n[id]; return n; });
   }
-  function clearCart() { setCart({}); }
+  function clearCart() { setCart({}); setHouseItems({}); }
 
   var cartItems = Object.values(cart);
-  var cartTotal = cartItems.reduce(function(s,i){ return s + i.article.price * i.quantity; }, 0);
+  var cartTotal = cartItems.reduce(function(s,i){ return houseItems[i.article.id] ? s : s + i.article.price * i.quantity; }, 0);
   var cartCount = cartItems.reduce(function(s,i){ return s + i.quantity; }, 0);
   var paidNum   = parseFloat(payInput.replace(',','.')) || 0;
   var rawChange = paidNum - cartTotal;
@@ -474,13 +578,38 @@ function App() {
   })();
 
   // ── BUCHEN ─────────────────────────────────────────────────────────────────
+  function doDragMove(clientY) {
+    var items = Array.from(document.querySelectorAll('.ac .sec'));
+    if (!items.length || !catOrder) return;
+    var closest = 0, closestDist = Infinity;
+    items.forEach(function(el, i) {
+      var r = el.getBoundingClientRect();
+      var dist = Math.abs(clientY - (r.top + r.height / 2));
+      if (dist < closestDist) { closestDist = dist; closest = i; }
+    });
+    var allCats = categories.slice().sort(function(a,b){ return a.order - b.order; });
+    var visCats = allCats.filter(function(c){ return c.visible; });
+    var dragIdx = visCats.findIndex(function(c){ return c.id === catOrder.id; });
+    if (dragIdx !== -1 && dragIdx !== closest) {
+      var item = visCats.splice(dragIdx, 1)[0];
+      visCats.splice(closest, 0, item);
+      visCats.forEach(function(c, i){ c.order = i; });
+      var hidCats = allCats.filter(function(c){ return !c.visible; });
+      hidCats.forEach(function(c, i){ c.order = visCats.length + i; });
+      saveCategories(visCats.concat(hidCats));
+    }
+  }
+
   function handleBook() {
     if (!cartItems.length) return;
     var now  = Date.now();
     var bid  = 'b-' + now;
-    var paid = paidNum || cartTotal;
-    var tip  = (noChange && paidNum > cartTotal + 0.001) ? +(paidNum - cartTotal).toFixed(2) : 0;
-    var chg  = noChange ? 0 : paid - cartTotal;
+    // Neues Konzept: Kunde gibt 'paid', möchte 'wish' zahlen, Rest = Rückgeld
+    var paid = parseFloat((payInput||'').replace(',','.')) || cartTotal;
+    var wish = payToAmount==='' ? cartTotal : (parseFloat(payToAmount.replace(',','.')) || cartTotal);
+    if (wish < cartTotal) wish = cartTotal;
+    var tip = +(wish - cartTotal).toFixed(2);
+    var chg = +(paid - wish).toFixed(2);
 
     var updatedArticles = articles.map(function(a) {
       var item = cart[a.id];
@@ -515,8 +644,11 @@ function App() {
         saveArticles(updatedArticles);
         setLastBooking({ bookingId:bid, items:cartItems, timestamp:now, total:cartTotal });
         setCart({});
+        setHouseItems({});
         setShowPay(false);
         setPayInput('');
+        setPayToAmount('');
+        setActiveField('paid');
         setNoChange(false);
         var msg = '✓ Gebucht · € ' + cartTotal.toFixed(2);
         if (tip > 0) msg += '  |  🎉 Trinkgeld: € ' + tip.toFixed(2);
@@ -572,8 +704,8 @@ function App() {
   function handleDeleteArt(id) { saveArticles(articles.filter(function(a){ return a.id!==id; })); setEditId(null); }
   function handleAddNew() {
     if (!newA.name || newA.price==='') return;
-    saveArticles(articles.concat([{ id:''+Date.now(), name:newA.name, category:newA.category, price:parseFloat(newA.price)||0, stock:parseInt(newA.stock)||0, active:true }]));
-    setNewA({ name:'', category:'Alkoholfreie Getränke', price:'', stock:'' });
+    saveArticles(articles.concat([{ id:''+Date.now(), name:newA.name, category:newA.category, price:parseFloat(newA.price)||0, stock:parseInt(newA.stock)||0, minStock:parseInt(newA.minStock)||5, active:true }]));
+    setNewA({ name:'', category:'Alkoholfreie Getränke', price:'', stock:'', minStock:'' });
     setShowNew(false);
   }
   function handleExportCSV() {
@@ -604,9 +736,14 @@ function App() {
   var totalRev = sales.reduce(function(s,x){ return s+x.totalPrice; }, 0);
   var totalTx  = bookings.length;
 
-  var byCategory = CATEGORIES.map(function(cat) {
-    return { cat:cat, list:articles.filter(function(a){ return a.active && a.category===cat; }) };
-  }).filter(function(g){ return g.list.length > 0; });
+  // Sortierte, sichtbare Kategorien
+  var sortedCats = categories.slice().sort(function(a,b){ return a.order-b.order; });
+  var byCategory = sortedCats
+    .filter(function(c){ return c.visible; })
+    .map(function(c) {
+      return { cat:c.name, catId:c.id, list:articles.filter(function(a){ return a.active && a.category===c.name; }) };
+    })
+    .filter(function(g){ return g.list.length > 0; });
 
   var filtered = articles.filter(function(a) {
     if (filter==='active'   && !a.active) return false;
@@ -624,7 +761,7 @@ function App() {
   var artCount = {};
   ts.forEach(function(s){ artCount[s.articleName] = (artCount[s.articleName]||0) + s.quantity; });
   var top5     = Object.entries(artCount).sort(function(a,b){ return b[1]-a[1]; }).slice(0,5);
-  var low      = articles.filter(function(a){ return a.active && a.stock<=5; });
+  var low      = articles.filter(function(a){ return a.active && a.stock<=(a.minStock!=null?a.minStock:5); });
   var dark     = theme==='dark';
 
   function openEdit(a) { setEditBuf({name:a.name,category:a.category,price:a.price,stock:a.stock}); setEditId(a.id); }
@@ -651,9 +788,14 @@ function App() {
 
       <div className="app">
         <nav className="nav">
-          {[['sales','💰 Verkauf'],['dashboard','📊 Dashboard'],['admin','⚙️ Verwaltung']].map(function(item) {
+          {[['sales','💰 Verkauf'],['dashboard','📊 Dashboard']].map(function(item) {
             return <button key={item[0]} className={'nb' + (view===item[0]?' on':'')} onClick={function(){ setView(item[0]); }}>{item[1]}</button>;
           })}
+          <button className="burger-btn" onClick={function(){ setShowBurger(true); }} title="Verwaltung">
+            <span className="burger-line" />
+            <span className="burger-line" />
+            <span className="burger-line" />
+          </button>
         </nav>
 
         {/* ── VERKAUF ──────────────────────────────────────────────────── */}
@@ -665,34 +807,63 @@ function App() {
                 <div className="sc"><div className="sc-l">Buchungen</div><div className="sc-v">{totalTx}</div></div>
                 <div className="sc"><div className="sc-l">Ø/Buchung</div><div className="sc-v">€ {totalTx>0?(totalRev/totalTx).toFixed(2):'0.00'}</div></div>
               </div>
-              {byCategory.map(function(g) {
+              {byCategory.map(function(g, gIdx) {
+                var isDragging = catOrder && catOrder.id === g.catId;
                 return (
-                  <div className="sec" key={g.cat}>
-                    <div className="st">{g.cat}</div>
-                    <div className="grid">
-                      {g.list.map(function(a) {
-                        var inC = (cart[a.id] && cart[a.id].quantity) || 0;
-                        var eff = a.stock - inC;
-                        return (
-                          <button key={a.id} className="ab" onClick={function(){ addToCart(a); }} disabled={a.stock<=inC}>
-                            {inC>0 && <span className="bdg">{inC}</span>}
-                            <div className="an">{a.name}</div>
-                            <div className="ap">€ {a.price.toFixed(2)}</div>
-                            <div className={'as' + (eff<=5?' low':'')}>Bestand: {eff}</div>
-                          </button>
-                        );
-                      })}
+                  <div key={g.cat} className={'sec'+(isDragging?' dragging':'')}>
+                    <div className="sec-drag-row">
+                      <div
+                        className="drag-handle"
+                        title="Reihenfolge verschieben"
+                        onMouseDown={function(e){
+                          e.preventDefault();
+                          setCatOrder({id:g.catId, startY:e.clientY});
+                        }}
+                        onTouchStart={function(e){
+                          e.preventDefault();
+                          setCatOrder({id:g.catId, startY:e.touches[0].clientY});
+                        }}
+                      >⠿</div>
+                      <div className="sec-title-wrap">
+                        <span className="st">{g.cat}</span>
+                        <span className="sec-count">{g.list.length}</span>
+                      </div>
+                    </div>
+                    <div className="sec-grid-wrap">
+                      <div className="grid">
+                        {g.list.map(function(a) {
+                          var inC = (cart[a.id] && cart[a.id].quantity) || 0;
+                          var eff = a.stock - inC;
+                          var threshold = (a.minStock != null ? a.minStock : 5);
+                          return (
+                            <button key={a.id} className="ab" onClick={function(){ addToCart(a); }} disabled={a.stock<=inC}>
+                              {inC>0 && <span className="bdg">{inC}</span>}
+                              <div className="an">{a.name}</div>
+                              <div className="ap">€ {a.price.toFixed(2)}</div>
+                              <div className={eff<=threshold ? "as low" : "as"}>Bestand: {eff}</div>
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
                 );
               })}
+              {catOrder && (
+                <div style={{position:'fixed',inset:0,zIndex:200,cursor:'grabbing'}}
+                  onMouseMove={function(e){ doDragMove(e.clientY); }}
+                  onTouchMove={function(e){ e.preventDefault(); doDragMove(e.touches[0].clientY); }}
+                  onMouseUp={function(){ setCatOrder(null); }}
+                  onTouchEnd={function(){ setCatOrder(null); }}
+                />
+              )}
             </div>
 
             <div className="cc">
               <div className="cart">
                 <div className="ch">
                   <span className="ct">🛒 Warenkorb{cartCount>0?' ('+cartCount+')':''}</span>
-                  {cartCount>0 && <button className="cc-btn" onClick={() => { clearCart(); setHouseItems({}); }}>Leeren</button>}
+                  {cartCount>0 && <button className="cc-btn" onClick={clearCart}>Leeren</button>}
                 </div>
                 <div className="cb">
                   {cartItems.length===0
@@ -701,30 +872,30 @@ function App() {
                         var a=entry.article, q=entry.quantity;
                         return (
                           <div key={a.id}>
-                          <div className="ci">
-                            <span className="cin">{a.name}</span>
-                            <div className="qc">
-                              <button className="qb" onClick={function(){ changeQty(a.id,-1); }}>−</button>
-                              <span className="qn">{q}</span>
-                              <button className="qb" onClick={function(){ changeQty(a.id,+1); }} disabled={q>=a.stock}>+</button>
+                            <div className="ci">
+                              <span className="cin">{a.name}</span>
+                              <div className="qc">
+                                <button className="qb" onClick={function(){ changeQty(a.id,-1); }}>−</button>
+                                <span className="qn">{q}</span>
+                                <button className="qb" onClick={function(){ changeQty(a.id,+1); }} disabled={q>=a.stock}>+</button>
+                              </div>
+                              <span className="cip" style={houseItems[a.id]?{color:'#f59e0b',fontWeight:'bold'}:{}}>
+                                {houseItems[a.id] ? '🏠 €0.00' : ('€ '+(a.price*q).toFixed(2))}
+                              </span>
+                              <button className="cdl" onClick={function(){ removeFromCart(a.id); }}>✕</button>
                             </div>
-                            <span className="cip" style={houseItems[a.id]?{color:'#f59e0b',fontWeight:'bold'}:{}}>
-                              {houseItems[a.id] ? '🏠 €0.00' : ('€ '+(a.price*q).toFixed(2))}
-                            </span>
-                            <button className="cdl" onClick={function(){ removeFromCart(a.id); }}>✕</button>
+                            <button
+                              className={'house-btn'+(houseItems[a.id]?' on':'')}
+                              onClick={function(){
+                                setHouseItems(function(prev){
+                                  var n=Object.assign({},prev);
+                                  if(n[a.id]) delete n[a.id]; else n[a.id]=true;
+                                  return n;
+                                });
+                              }}>
+                              {houseItems[a.id] ? '🏠 Aufs Haus (aktiv)' : '🏠 Aufs Haus'}
+                            </button>
                           </div>
-                          <button
-                            className={'house-btn'+(houseItems[a.id]?' on':'')}
-                            onClick={function(){
-                              setHouseItems(function(prev){
-                                var n=Object.assign({},prev);
-                                if(n[a.id]) delete n[a.id]; else n[a.id]=true;
-                                return n;
-                              });
-                            }}>
-                            {houseItems[a.id] ? '🏠 Aufs Haus (aktiv)' : '🏠 Aufs Haus'}
-                          </button>
-                        </div>
                         );
                       })
                   }
@@ -743,7 +914,7 @@ function App() {
                     <span className="tl">Gesamt</span>
                     <span className="tv">€ {cartTotal.toFixed(2)}</span>
                   </div>
-                  <button className="bkbtn" onClick={function(){ setPayInput(''); setNoChange(false); setShowPay(true); }} disabled={cartCount===0}>
+                  <button className="bkbtn" onClick={function(){ setPayInput(''); setPayToAmount(''); setActiveField('paid'); setNoChange(false); setShowPay(true); }} disabled={cartCount===0}>
                     {cartCount===0 ? 'Artikel wählen …' : '💳 Zur Kasse · € ' + cartTotal.toFixed(2)}
                   </button>
                 </div>
@@ -755,58 +926,147 @@ function App() {
         {/* ── BEZAHL-MODAL ─────────────────────────────────────────────── */}
         {showPay && (
           <div className="pay-overlay" onClick={function(){ setShowPay(false); }}>
-            <div className="pay-modal" onClick={function(e){ e.stopPropagation(); }}>
-              <h3>💳 Bezahlung</h3>
-              <div className="pay-sub">Wie viel hat der Kunde gegeben?</div>
-              <div className="pay-total">
-                <span className="pay-total-lbl">Zu zahlen</span>
-                <span className="pay-total-val">€ {cartTotal.toFixed(2)}</span>
-              </div>
-              <div className="quick-btns">
-                {quickAmounts.map(function(amt,i) {
-                  var isExact = Math.abs(amt-cartTotal) < 0.001;
-                  return (
-                    <button key={i} className={'qkbtn' + (isExact?' exact':'')}
-                      onClick={function(){ setPayInput(isExact ? cartTotal.toFixed(2) : amt.toFixed(2)); }}>
-                      {isExact ? '✓ Exakt' : '€ ' + amt.toFixed(0)}
-                    </button>
-                  );
-                })}
-              </div>
-              <input className="pay-inp" type="number" step="0.01" min="0"
-                placeholder={'€ ' + cartTotal.toFixed(2)} value={payInput}
-                onChange={function(e){ setPayInput(e.target.value); }} autoFocus />
-
-              {paidNum > cartTotal + 0.001 && (
-                <div className={'tip-row' + (noChange?' on':'')} onClick={function(){ setNoChange(function(v){ return !v; }); }}>
-                  <span className="tip-label">
-                    🎉 Trinkgeld behalten
-                    {noChange && <span style={{fontSize:11,fontWeight:400,opacity:.8}}>(kein Rückgeld)</span>}
-                  </span>
-                  {noChange && <span className="tip-amount">+ € {(paidNum-cartTotal).toFixed(2)}</span>}
-                  <div className={'tip-toggle' + (noChange?' on':'')} />
+            <div className="pay-wrap" onClick={function(e){ e.stopPropagation(); }}>
+              {/* NUMPAD */}
+              <div className="numpad" style={{order: numpadSide==='left' ? 1 : 2}}>
+                <div className="np-header">
+                  <span className="np-title">{activeField==='paid' ? '💵 Gegeben' : '🎯 Möchte zahlen'}</span>
+                  <div className="np-side-toggle">
+                    <button className={'np-side-btn' + (numpadSide==='left'?' on':'')}
+                      onClick={function(){ setNumpadSide('left'); localStorage.setItem('pk-numpad-side','left'); }}>◀ Links</button>
+                    <button className={'np-side-btn' + (numpadSide==='right'?' on':'')}
+                      onClick={function(){ setNumpadSide('right'); localStorage.setItem('pk-numpad-side','right'); }}>Rechts ▶</button>
+                  </div>
                 </div>
-              )}
-
-              <div className={'chg-row' + (payInput===''?' neu' : (noChange && paidNum>cartTotal+0.001)?' pos' : rawChange>=0?' pos':' neg')}>
-                <span className="chg-lbl">
-                  {payInput==='' ? 'Betrag eingeben'
-                    : (noChange && paidNum>cartTotal+0.001) ? '🎉 Trinkgeld'
-                    : rawChange<0 ? '⚠️ Zu wenig'
-                    : 'Rückgeld'}
-                </span>
-                {payInput!=='' && (
-                  <span className={'chg-val' + ((noChange&&paidNum>cartTotal+0.001)||rawChange>=0?' pos':' neg')}>
-                    {(noChange && paidNum>cartTotal+0.001) ? '€ '+(paidNum-cartTotal).toFixed(2)
-                      : rawChange<0 ? '− € '+Math.abs(rawChange).toFixed(2)
-                      : '€ '+rawChange.toFixed(2)}
-                  </span>
-                )}
+                {['1','2','3','4','5','6','7','8','9',',','0'].map(function(key){
+                  return <button key={key} className="np-key" onClick={function(){
+                    var current = activeField==='paid' ? payInput : payToAmount;
+                    var newVal = current;
+                    if (key === ',') {
+                      if (current.indexOf(',') < 0 && current.indexOf('.') < 0) {
+                        newVal = (current === '' ? '0' : current) + '.';
+                      }
+                    } else {
+                      newVal = current + key;
+                    }
+                    if (activeField==='paid') {
+                      setPayInput(newVal);
+                      // Wenn paid sinkt und wish > paid: wish anpassen
+                      var newPaid = parseFloat((newVal||'0').replace(',','.')) || 0;
+                      var curWish = parseFloat((payToAmount||'').replace(',','.')) || 0;
+                      if (payToAmount !== '' && curWish > newPaid) {
+                        setPayToAmount(newPaid > 0 ? newPaid.toFixed(2) : '');
+                      }
+                    } else {
+                      // wish darf nicht größer als paid sein
+                      var newWish = parseFloat((newVal||'0').replace(',','.')) || 0;
+                      var curPaid = parseFloat((payInput||'0').replace(',','.')) || 0;
+                      if (curPaid > 0 && newWish > curPaid) {
+                        newVal = curPaid.toFixed(2);
+                      }
+                      setPayToAmount(newVal);
+                    }
+                  }}>{key}</button>;
+                })}
+                <button className="np-key del" onClick={function(){
+                  var current = activeField==='paid' ? payInput : payToAmount;
+                  if (activeField==='paid') {
+                    setPayInput('');
+                    setPayToAmount('');
+                  } else {
+                    setPayToAmount('');
+                  }
+                }}>⌫</button>
               </div>
 
-              <div className="pay-actions">
-                <button className="pay-cancel" onClick={function(){ setShowPay(false); }}>Abbrechen</button>
-                <button className="pay-ok" onClick={handleBook} disabled={payInput!=='' && rawChange<0}>✓ Buchen</button>
+              {/* PAY MODAL */}
+              <div className="pay-modal pay-modal-wide" style={{order: numpadSide==='left' ? 2 : 1}}>
+                <h3>💳 Bezahlung</h3>
+
+                {/* Feld 1: Gesamtkosten (read-only) */}
+                <div className="pay-field-row">
+                  <span className="pay-field-lbl">Gesamtkosten</span>
+                  <span className="pay-field-val total">€ {cartTotal.toFixed(2)}</span>
+                </div>
+
+                {/* Feld 2: Was gibt mir der Kunde */}
+                <div className={'pay-field-input' + (activeField==='paid'?' active':'')} onClick={function(){ setActiveField('paid'); }}>
+                  <div className="pay-field-header">
+                    <span className="pay-field-lbl">💵 Kunde gibt mir</span>
+                    {payInput!=='' && <button className="pay-field-clear" onClick={function(e){ e.stopPropagation(); setPayInput(''); }}>✕</button>}
+                  </div>
+                  <div className="pay-field-display">
+                    {payInput==='' ? <span className="pay-field-placeholder">Betrag eintippen…</span>
+                                   : <span className="pay-field-amount">€ {parseFloat(payInput.replace(',','.')).toFixed(2)}</span>}
+                  </div>
+                  <div className="quick-btns" style={{marginTop:8,marginBottom:0}}>
+                    {quickAmounts.map(function(amt,i) {
+                      var isExact = Math.abs(amt-cartTotal) < 0.001;
+                      return (
+                        <button key={i} className={'qkbtn' + (isExact?' exact':'')}
+                          onClick={function(e){ e.stopPropagation(); setPayInput(isExact ? cartTotal.toFixed(2) : amt.toFixed(2)); setActiveField('paid'); }}>
+                          {isExact ? '✓ Exakt' : '€ ' + amt.toFixed(0)}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Feld 3: Was möchte er zahlen */}
+                <div className={'pay-field-input' + (activeField==='wish'?' active':'')} onClick={function(){ setActiveField('wish'); }}>
+                  <div className="pay-field-header">
+                    <span className="pay-field-lbl">🎯 Kunde möchte zahlen</span>
+                    {payToAmount!=='' && <button className="pay-field-clear" onClick={function(e){ e.stopPropagation(); setPayToAmount(''); }}>✕</button>}
+                  </div>
+                  <div className="pay-field-display">
+                    {payToAmount==='' ? <span className="pay-field-placeholder">Standard: € {cartTotal.toFixed(2)}</span>
+                                      : <span className="pay-field-amount">€ {parseFloat(payToAmount.replace(',','.')).toFixed(2)}</span>}
+                  </div>
+                </div>
+
+                {/* ZUSAMMENFASSUNG: Trinkgeld + Rückgeld */}
+                {(function(){
+                  var paid = parseFloat((payInput||'0').replace(',','.')) || 0;
+                  var wish = payToAmount==='' ? cartTotal : (parseFloat(payToAmount.replace(',','.')) || 0);
+                  var tip  = Math.max(0, wish - cartTotal);
+                  var change = paid - wish;
+                  var canBook = paid >= wish && wish >= cartTotal;
+                  return (
+                    <div className="pay-summary">
+                      {tip > 0.001 && (
+                        <div className="pay-sum-row tip-color">
+                          <span>🎉 Trinkgeld</span>
+                          <strong>€ {tip.toFixed(2)}</strong>
+                        </div>
+                      )}
+                      {payInput!=='' && (
+                        <div className={'pay-sum-row ' + (change < 0 ? 'neg' : 'pos')}>
+                          <span>{change < 0 ? '⚠️ Fehlt noch' : '💰 Rückgeld'}</span>
+                          <strong>€ {Math.abs(change).toFixed(2)}</strong>
+                        </div>
+                      )}
+                      {wish < cartTotal && payToAmount!=='' && (
+                        <div className="pay-sum-row neg">
+                          <span>⚠️ Weniger als Gesamtkosten</span>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
+
+                <div className="pay-actions">
+                  <button className="pay-cancel" onClick={function(){ setShowPay(false); }}>Abbrechen</button>
+                  {(function(){
+                    var paid = parseFloat((payInput||'0').replace(',','.')) || 0;
+                    var wish = payToAmount==='' ? cartTotal : (parseFloat(payToAmount.replace(',','.')) || 0);
+                    var disabled = payInput==='' || paid < wish || wish < cartTotal;
+                    return (
+                      <button className="pay-ok" onClick={handleBook} disabled={disabled}>
+                        ✓ Buchen
+                      </button>
+                    );
+                  })()}
+                </div>
               </div>
             </div>
           </div>
@@ -911,103 +1171,248 @@ function App() {
           </div>
         )}
 
-        {/* ── VERWALTUNG ───────────────────────────────────────────────── */}
-        {view==='admin' && (
-          <div className="main">
-            <div className="reset-card">
-              <h3>🔄 Neuer Tag – Kasse zurücksetzen</h3>
-              <p>Löscht alle Buchungen, Verkäufe und Statistiken. Artikel und Preise bleiben erhalten.</p>
-              <button className="btn d" onClick={function(){
-                askConfirm('Kasse zurücksetzen?','Alle Buchungen und Statistiken werden unwiderruflich gelöscht. Artikel bleiben erhalten.','🔄', handleFullReset);
-              }}>🔄 Kasse zurücksetzen</button>
-            </div>
-            <div className="divider" />
-            <div className="ah">
-              <div className="row">
-                <input className="sr" placeholder="Artikel suchen…" value={search} onChange={function(e){ setSearch(e.target.value); }} />
-                <button className="btn p" onClick={function(){ setShowNew(true); }}>+ Neuer Artikel</button>
-              </div>
-              <div className="row" style={{justifyContent:'space-between'}}>
-                <div className="fr">
-                  {[['all','Alle'],['active','Aktiv'],['inactive','Inaktiv']].map(function(item){
-                    return <button key={item[0]} className={'fb'+(filter===item[0]?' on':'')} onClick={function(){ setFilter(item[0]); }}>{item[1]}</button>;
-                  })}
-                </div>
-                <div className="row">
-                  <button className="btn" onClick={handleExportCSV}>📋 CSV Export</button>
-                  <label className="btn" style={{cursor:'pointer'}}>
-                    📥 Import
-                    <input ref={fileRef} type="file" accept=".csv" style={{display:'none'}} onChange={handleImport} />
-                  </label>
-                  <button className="tgl" onClick={function(){ setTheme(function(t){ return t==='light'?'dark':'light'; }); }}>
-                    {dark?'☀️':'🌙'}
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="al">
-              {filtered.map(function(a){
-                return (
-                  <div key={a.id} className={'ar'+(a.active?'':' off')}>
-                    <div className="ai">
-                      <div className="an">{a.name}</div>
-                      <div className="am">{a.category} · € {a.price.toFixed(2)}</div>
-                    </div>
-                    <div className="ask">Bestand: {a.stock}</div>
-                    <div className="acs">
-                      <button className="btn s" onClick={function(){ openEdit(a); }}>✏️ Bearbeiten</button>
-                      <button className={'btn s '+(a.active?'g':'m')} onClick={function(){ toggleActive(a.id); }}>
-                        {a.active?'✓ Aktiv':'✗ Inaktiv'}
-                      </button>
-                    </div>
+        {/* ── BURGER MENU ─────────────────────────────────────────────── */}
+        {showBurger && (
+          <div className="burger-menu-overlay" onClick={function(){ setShowBurger(false); }}>
+            <div className="burger-menu" onClick={function(e){ e.stopPropagation(); }}>
+              <div className="burger-menu-title">⚙️ Verwaltung</div>
+              <div className="burger-menu-items">
+                <button className="burger-item" onClick={function(){ setAdminView('articles'); setShowBurger(false); }}>
+                  <span className="burger-item-icon">📋</span>
+                  <div className="burger-item-text">
+                    <div className="burger-item-title">Artikel</div>
+                    <div className="burger-item-desc">Artikel verwalten, Preise & Bestand</div>
                   </div>
-                );
-              })}
-              {filtered.length===0 && <div className="emp">Keine Artikel gefunden</div>}
+                  <span style={{color:dark?'#9ca3af':'#6b7280'}}>›</span>
+                </button>
+                <button className="burger-item" onClick={function(){ setAdminView('categories'); setShowBurger(false); }}>
+                  <span className="burger-item-icon">📦</span>
+                  <div className="burger-item-text">
+                    <div className="burger-item-title">Produktgruppen</div>
+                    <div className="burger-item-desc">Gruppen anlegen & ein-/ausblenden</div>
+                  </div>
+                  <span style={{color:dark?'#9ca3af':'#6b7280'}}>›</span>
+                </button>
+                <button className="burger-item" onClick={function(){ setAdminView('settings'); setShowBurger(false); }}>
+                  <span className="burger-item-icon">🌙</span>
+                  <div className="burger-item-text">
+                    <div className="burger-item-title">Einstellungen</div>
+                    <div className="burger-item-desc">Design, Numpad-Position</div>
+                  </div>
+                  <span style={{color:dark?'#9ca3af':'#6b7280'}}>›</span>
+                </button>
+                <button className="burger-item danger" onClick={function(){ setAdminView('reset'); setShowBurger(false); }}>
+                  <span className="burger-item-icon">🔄</span>
+                  <div className="burger-item-text">
+                    <div className="burger-item-title">Kasse zurücksetzen</div>
+                    <div className="burger-item-desc">Neuer Tag – Daten löschen</div>
+                  </div>
+                  <span style={{color:'#ef4444'}}>›</span>
+                </button>
+              </div>
             </div>
-
-            {showNew && (
-              <div className="ov" onClick={function(){ setShowNew(false); }}>
-                <div className="mod" onClick={function(e){ e.stopPropagation(); }}>
-                  <h3>Neuer Artikel</h3>
-                  <input className="ff" placeholder="Name" value={newA.name} onChange={function(e){ setNewA(Object.assign({},newA,{name:e.target.value})); }} />
-                  <select className="ff" value={newA.category} onChange={function(e){ setNewA(Object.assign({},newA,{category:e.target.value})); }}>
-                    {CATEGORIES.map(function(c){ return <option key={c}>{c}</option>; })}
-                  </select>
-                  <input className="ff" type="number" placeholder="Preis (€)" step="0.01" min="0" value={newA.price} onChange={function(e){ setNewA(Object.assign({},newA,{price:e.target.value})); }} />
-                  <input className="ff" type="number" placeholder="Startbestand" min="0" value={newA.stock} onChange={function(e){ setNewA(Object.assign({},newA,{stock:e.target.value})); }} />
-                  <div className="mf">
-                    <button className="btn p" onClick={handleAddNew}>Hinzufügen</button>
-                    <button className="btn" onClick={function(){ setShowNew(false); }}>Abbrechen</button>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {editId && (
-              <div className="ov" onClick={function(){ setEditId(null); }}>
-                <div className="mod" onClick={function(e){ e.stopPropagation(); }}>
-                  <h3>Artikel bearbeiten</h3>
-                  <input className="ff" placeholder="Name" value={editBuf.name||''} onChange={function(e){ setEditBuf(Object.assign({},editBuf,{name:e.target.value})); }} />
-                  <select className="ff" value={editBuf.category||'Alkoholfreie Getränke'} onChange={function(e){ setEditBuf(Object.assign({},editBuf,{category:e.target.value})); }}>
-                    {CATEGORIES.map(function(c){ return <option key={c}>{c}</option>; })}
-                  </select>
-                  <input className="ff" type="number" step="0.01" min="0" placeholder="Preis (€)" value={editBuf.price!=null?editBuf.price:''} onChange={function(e){ setEditBuf(Object.assign({},editBuf,{price:parseFloat(e.target.value)||0})); }} />
-                  <input className="ff" type="number" min="0" placeholder="Bestand" value={editBuf.stock!=null?editBuf.stock:''} onChange={function(e){ setEditBuf(Object.assign({},editBuf,{stock:parseInt(e.target.value)||0})); }} />
-                  <div className="mf">
-                    <button className="btn p" onClick={handleSaveEdit}>💾 Speichern</button>
-                    <button className="btn d" onClick={function(){
-                      askConfirm('Artikel löschen?','"'+editBuf.name+'" wird dauerhaft entfernt.','🗑',function(){ handleDeleteArt(editId); });
-                    }}>🗑 Löschen</button>
-                    <button className="btn" onClick={function(){ setEditId(null); }}>✕</button>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         )}
 
+        {/* ── ADMIN MODALS ─────────────────────────────────────────────── */}
+        {adminView && (
+          <div className="admin-modal-overlay" onClick={function(){ setAdminView(null); setShowBurger(true); }}>
+            <div className="admin-modal" onClick={function(e){ e.stopPropagation(); }}>
+              <div className="admin-modal-header">
+                <button className="admin-modal-back" onClick={function(){ setAdminView(null); setShowBurger(true); }}>‹</button>
+                <span className="admin-modal-title">
+                  {adminView==='articles'   ? '📋 Artikel'
+                  :adminView==='categories' ? '📦 Produktgruppen'
+                  :adminView==='settings'   ? '🌙 Einstellungen'
+                  :                          '🔄 Kasse zurücksetzen'}
+                </span>
+              </div>
+              <div className="admin-modal-body">
+
+                {/* ── ARTIKEL ── */}
+                {adminView==='articles' && (
+                  <div>
+                    <div className="ah">
+                      <div className="row">
+                        <input className="sr" placeholder="Artikel suchen…" value={search} onChange={function(e){ setSearch(e.target.value); }} />
+                        <button className="btn p" onClick={function(){ setShowNew(true); }}>+ Neuer Artikel</button>
+                      </div>
+                      <div className="fr">
+                        {[['all','Alle'],['active','Aktiv'],['inactive','Inaktiv']].map(function(item){
+                          return <button key={item[0]} className={'fb'+(filter===item[0]?' on':'')} onClick={function(){ setFilter(item[0]); }}>{item[1]}</button>;
+                        })}
+                      </div>
+                      <div className="row">
+                        <button className="btn" onClick={handleExportCSV}>📋 CSV Export</button>
+                        <label className="btn" style={{cursor:'pointer'}}>
+                          📥 Import
+                          <input ref={fileRef} type="file" accept=".csv" style={{display:'none'}} onChange={handleImport} />
+                        </label>
+                      </div>
+                    </div>
+                    <div className="al">
+                      {filtered.map(function(a){
+                        return (
+                          <div key={a.id} className={'ar'+(a.active?'':' off')}>
+                            <div className="ai">
+                              <div className="an">{a.name}</div>
+                              <div className="am">{a.category} · € {a.price.toFixed(2)} · Melde: {a.minStock!=null?a.minStock:5}</div>
+                            </div>
+                            <div className="ask">Bestand: {a.stock}</div>
+                            <div className="acs">
+                              <button className="btn s" onClick={function(){ openEdit(a); }}>✏️</button>
+                              <button className={'btn s '+(a.active?'g':'m')} onClick={function(){ toggleActive(a.id); }}>
+                                {a.active?'✓':'✗'}
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                      {filtered.length===0 && <div className="emp">Keine Artikel gefunden</div>}
+                    </div>
+                  </div>
+                )}
+
+                {/* ── PRODUKTGRUPPEN ── */}
+                {adminView==='categories' && (
+                  <div>
+                    <div className="cat-section-header" style={{marginBottom:14}}>
+                      <span style={{fontSize:13,color:dark?'#9ca3af':'#6b7280'}}>Sichtbare Gruppen erscheinen im Verkauf</span>
+                      <button className="btn p" style={{fontSize:11,padding:'6px 10px'}}
+                        onClick={function(){
+                          var name = window.prompt('Name der neuen Produktgruppe:');
+                          if (!name || !name.trim()) return;
+                          var newCat = { id:'c-'+Date.now(), name:name.trim(), visible:true, order:categories.length };
+                          saveCategories(categories.concat([newCat]));
+                        }}>+ Neu</button>
+                    </div>
+                    <div className="cat-list">
+                      {categories.slice().sort(function(a,b){return a.order-b.order;}).map(function(c){
+                        return (
+                          <div key={c.id} className="cat-row">
+                            <span className="cat-name">{c.name}</span>
+                            <div className="cat-actions">
+                              <button className={'btn s '+(c.visible?'g':'m')} onClick={function(){
+                                saveCategories(categories.map(function(x){
+                                  return x.id===c.id ? Object.assign({},x,{visible:!x.visible}) : x;
+                                }));
+                              }}>{c.visible ? '👁 Sichtbar' : '🙈 Aus'}</button>
+                              <button className="btn s" onClick={function(){
+                                var n = window.prompt('Neuer Name:', c.name);
+                                if (!n || !n.trim()) return;
+                                saveCategories(categories.map(function(x){
+                                  return x.id===c.id ? Object.assign({},x,{name:n.trim()}) : x;
+                                }));
+                              }}>✏️</button>
+                              {categories.length > 1 && (
+                                <button className="btn s d" onClick={function(){
+                                  if (!window.confirm('Gruppe "'+c.name+'" löschen?')) return;
+                                  saveCategories(categories.filter(function(x){ return x.id!==c.id; }));
+                                }}>🗑</button>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* ── EINSTELLUNGEN ── */}
+                {adminView==='settings' && (
+                  <div style={{display:'flex',flexDirection:'column',gap:16}}>
+                    <div className="cat-row" style={{justifyContent:'space-between'}}>
+                      <div>
+                        <div style={{fontSize:14,fontWeight:600}}>Design</div>
+                        <div style={{fontSize:12,color:dark?'#9ca3af':'#6b7280'}}>Hell- oder Dunkel-Modus</div>
+                      </div>
+                      <button className="tgl" onClick={function(){ setTheme(function(t){ return t==='light'?'dark':'light'; }); }}>
+                        {dark?'☀️ Hell':'🌙 Dunkel'}
+                      </button>
+                    </div>
+                    <div className="cat-row" style={{justifyContent:'space-between'}}>
+                      <div>
+                        <div style={{fontSize:14,fontWeight:600}}>Numpad-Position</div>
+                        <div style={{fontSize:12,color:dark?'#9ca3af':'#6b7280'}}>Links oder rechts vom Bezahlfenster</div>
+                      </div>
+                      <div style={{display:'flex',gap:6}}>
+                        <button className={'btn s'+(numpadSide==='left'?' p':'')} onClick={function(){ setNumpadSide('left'); localStorage.setItem('pk-numpad-side','left'); }}>◀ Links</button>
+                        <button className={'btn s'+(numpadSide==='right'?' p':'')} onClick={function(){ setNumpadSide('right'); localStorage.setItem('pk-numpad-side','right'); }}>Rechts ▶</button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* ── KASSE ZURÜCKSETZEN ── */}
+                {adminView==='reset' && (
+                  <div>
+                    <div className="reset-card">
+                      <h3>🔄 Kasse zurücksetzen</h3>
+                      <p>Löscht alle Buchungen, Verkäufe und Statistiken. Artikel, Preise und Produktgruppen bleiben erhalten.</p>
+                      <button className="btn d" onClick={function(){
+                        askConfirm(
+                          'Kasse zurücksetzen?',
+                          'Alle Buchungen und Statistiken werden unwiderruflich gelöscht. Artikel bleiben erhalten.',
+                          '🔄',
+                          function(){
+                            setSales([]); setBookings([]); setCart({}); setHouseItems({}); setLastBooking(null);
+                            try { localStorage.removeItem('pk-sales'); localStorage.removeItem('pk-bookings'); } catch(e){}
+                            showToastMsg('✓ Kasse zurückgesetzt!');
+                            setAdminView(null);
+                          }
+                        );
+                      }}>🔄 Jetzt zurücksetzen</button>
+                    </div>
+                  </div>
+                )}
+
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── ARTIKEL MODALS ───────────────────────────────────────────── */}
+        {showNew && (
+          <div className="ov" onClick={function(){ setShowNew(false); }}>
+            <div className="mod" onClick={function(e){ e.stopPropagation(); }}>
+              <h3>Neuer Artikel</h3>
+              <input className="ff" placeholder="Name" value={newA.name} onChange={function(e){ setNewA(Object.assign({},newA,{name:e.target.value})); }} />
+              <select className="ff" value={newA.category} onChange={function(e){ setNewA(Object.assign({},newA,{category:e.target.value})); }}>
+                {categories.map(function(c){ return <option key={c.id} value={c.name}>{c.name}</option>; })}
+              </select>
+              <input className="ff" type="number" placeholder="Preis (€)" step="0.01" min="0" value={newA.price} onChange={function(e){ setNewA(Object.assign({},newA,{price:e.target.value})); }} />
+              <input className="ff" type="number" placeholder="Startbestand" min="0" value={newA.stock} onChange={function(e){ setNewA(Object.assign({},newA,{stock:e.target.value})); }} />
+              <input className="ff" type="number" placeholder="Meldebestand (z.B. 5)" min="0" value={newA.minStock||''} onChange={function(e){ setNewA(Object.assign({},newA,{minStock:parseInt(e.target.value)||0})); }} />
+              <div className="mf">
+                <button className="btn p" onClick={handleAddNew}>Hinzufügen</button>
+                <button className="btn" onClick={function(){ setShowNew(false); }}>Abbrechen</button>
+              </div>
+            </div>
+          </div>
+        )}
+        {editId && (
+          <div className="ov" onClick={function(){ setEditId(null); }}>
+            <div className="mod" onClick={function(e){ e.stopPropagation(); }}>
+              <h3>Artikel bearbeiten</h3>
+              <input className="ff" placeholder="Name" value={editBuf.name||''} onChange={function(e){ setEditBuf(Object.assign({},editBuf,{name:e.target.value})); }} />
+              <select className="ff" value={editBuf.category||categories[0]&&categories[0].name||''} onChange={function(e){ setEditBuf(Object.assign({},editBuf,{category:e.target.value})); }}>
+                {categories.map(function(c){ return <option key={c.id} value={c.name}>{c.name}</option>; })}
+              </select>
+              <input className="ff" type="number" step="0.01" min="0" placeholder="Preis (€)" value={editBuf.price!=null?editBuf.price:''} onChange={function(e){ setEditBuf(Object.assign({},editBuf,{price:parseFloat(e.target.value)||0})); }} />
+              <input className="ff" type="number" min="0" placeholder="Bestand" value={editBuf.stock!=null?editBuf.stock:''} onChange={function(e){ setEditBuf(Object.assign({},editBuf,{stock:parseInt(e.target.value)||0})); }} />
+              <input className="ff" type="number" min="0" placeholder="Meldebestand" value={editBuf.minStock!=null?editBuf.minStock:''} onChange={function(e){ setEditBuf(Object.assign({},editBuf,{minStock:parseInt(e.target.value)||0})); }} />
+              <div className="mf">
+                <button className="btn p" onClick={handleSaveEdit}>💾 Speichern</button>
+                <button className="btn d" onClick={function(){
+                  askConfirm('Artikel löschen?','"'+editBuf.name+'" wird dauerhaft entfernt.','🗑',function(){ handleDeleteArt(editId); });
+                }}>🗑</button>
+                <button className="btn" onClick={function(){ setEditId(null); }}>✕</button>
+              </div>
+            </div>
+          </div>
+        )}
+
+      <div className="version-badge">v1.1.0</div>
       </div>
     </div>
   );
